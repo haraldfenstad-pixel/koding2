@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clickable Word Squares</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #f7f7f7;
+      font-family: Arial, sans-serif;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 130px);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .square {
+      width: 130px;
+      height: 130px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 26px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .square:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .square:active {
+      transform: translateY(0);
+    }
+
+    .sentence {
+      max-width: 700px;
+      font-size: 24px;
+      line-height: 1.7;
+      text-align: center;
+      color: #222;
+    }
+
+    .blank {
+      display: inline-block;
+      min-width: 70px;
+      padding: 2px 8px;
+      border-bottom: 2px solid #333;
+      font-weight: bold;
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <button class="square" data-word="who" style="background: #4CAF50;">who</button>
+    <button class="square" data-word="what" style="background: #2196F3;">what</button>
+    <button class="square" data-word="her" style="background: #FF9800;">her</button>
+    <button class="square" data-word="him" style="background: #E91E63;">him</button>
+  </div>
+
+  <div class="sentence" id="sentence">
+    Said <span class="blank">_</span>? They all liked to play computer games.
+    <span class="blank">_</span> is the best game this year?
+    Jim knows, ask <span class="blank">_</span>.
+    Tina also got some good picks, ask <span class="blank">_</span>.
+  </div>
+
+  <script>
+    const blanks = document.querySelectorAll('.blank');
+    const squares = document.querySelectorAll('.square');
+    let index = 0;
+
+    function fillNextBlank(word) {
+      if (index >= blanks.length) return;
+      blanks[index].textContent = word;
+      index += 1;
+    }
+
+    squares.forEach((button) => {
+      button.addEventListener('click', () => {
+        fillNextBlank(button.dataset.word);
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
